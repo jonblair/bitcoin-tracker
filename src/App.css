@@ -1,0 +1,45 @@
+.app {
+  text-align: center;
+}
+
+.app-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 60px;
+}
+
+.app-header {
+  background-color: #222;
+  height: 100px;
+  padding: 20px;
+  color: white;
+}
+
+.app-title {
+  font-size: 1.5em;
+}
+
+.app-intro {
+  font-size: large;
+}
+
+.app-body {
+  text-align: left;
+  margin-left: 1em;
+  height: 42em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.app-footer {
+  text-align: center;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.priceTable {
+  margin-left: 1em;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
