@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Moment from 'react-moment';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 const _api = 'https://api.coindesk.com/v1/bpi/currentprice.json';
 
@@ -70,21 +71,21 @@ class App extends Component {
         </header>
         <p className="app-intro app-body">
         <p>
-          Updated: {this.state.myUpdatedTime}
+          Updated Time (UTC): {this.state.myUpdatedTime}
           <br/>
-          Local: <Moment format="MM/DD/YYYY hh:mm A">{this.state.myUpdatedTime}</Moment>
+          Local Time: <Moment format="MM/DD/YYYY hh:mm A">{this.state.myUpdatedTime}</Moment>
         </p>
         <p>
           Prices: <br/>
           <table className="priceTable">
             <tr>
-              <td>$ {this.state.myRateUS} {this.state.myRateCodeUS}</td>
+              <td>{ ReactHtmlParser(this.state.myRateSymbolUS) } {this.state.myRateUS} {this.state.myRateCodeUS}</td>
             </tr>
             <tr>
-              <td>£ {this.state.myRateGB} {this.state.myRateCodeGB}</td>
+              <td>{ ReactHtmlParser(this.state.myRateSymbolGB) } {this.state.myRateGB} {this.state.myRateCodeGB}</td>
             </tr>
             <tr>
-              <td>€ {this.state.myRateEU} {this.state.myRateCodeEU}</td>
+              <td>{ ReactHtmlParser(this.state.myRateSymbolEU) } {this.state.myRateEU} {this.state.myRateCodeEU}</td>
             </tr>
           </table>
         </p>
