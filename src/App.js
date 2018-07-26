@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Moment from 'react-moment';
 
 const _api = 'https://api.coindesk.com/v1/bpi/currentprice.json';
 
@@ -71,6 +72,8 @@ class App extends Component {
         <p className="app-intro app-body">
         <p>
           Updated: {this.state.myUpdatedTime}
+          <br/>
+          Local: <Moment format="MM/DD/YYYY hh:mm A">{this.state.myUpdatedTime}</Moment>
         </p>
         <p>
           Prices: <br/>
