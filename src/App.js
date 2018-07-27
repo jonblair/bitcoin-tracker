@@ -5,6 +5,7 @@ import Moment from 'react-moment';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 const _api = 'https://api.coindesk.com/v1/bpi/currentprice.json';
+const _historicalApi = "https://api.coindesk.com/v1/bpi/historical/close.json?index=usd";
 
 class App extends Component {
   constructor(props) {
@@ -25,13 +26,15 @@ class App extends Component {
       myRateEU: null,
       myRateCodeEU: null,
       myRateSymbolEU: null,
-      myRateDescriptionEU: null
+      myRateDescriptionEU: null,
+      myHistory: [],
     };
 
   }
 
   componentDidMount() {
     this.getBitcoinData();
+    this.getHistoricalData();
   }
 
   getBitcoinData() {
@@ -55,12 +58,24 @@ class App extends Component {
         myRateCodeEU: json.bpi.EUR.code,
         myRateSymbolEU: json.bpi.EUR.symbol,
         myRateDescriptionEU: json.bpi.EUR.description
-      })
+      });
     }
     
     request(_api);
-   
    }
+
+  getHistoricalData() {
+    const historyRequest = async (_historicalApi) => {
+      const historyResponse = await fetch(_historicalApi);
+      const historyJson = await historyResponse.json();
+
+      this.setState({
+        myHistory: historyJson.bpi,
+      });
+  }
+
+  historyRequest(_historicalApi);
+}
 
   render() {
 
@@ -70,13 +85,15 @@ class App extends Component {
           <h1 className="app-title">{this.state.myChartName} Tracker</h1>
         </header>
         <p className="app-intro app-body">
-        <p>
-          Updated Time (UTC): {this.state.myUpdatedTime}
+        <p className="app-dates">
+          Updated Date: <Moment format="MM/DD/YYYY">{this.state.myUpdatedTime}</Moment>
           <br/>
-          Local Time: <Moment format="MM/DD/YYYY hh:mm A">{this.state.myUpdatedTime}</Moment>
+          Updated Time (UTC): <Moment format="HH:mm">{this.state.myUpdatedTime}</Moment>
+          <br/>
+          Local Time: <Moment format="hh:mm A">{this.state.myUpdatedTime}</Moment>
         </p>
-        <p>
-          Prices: <br/>
+        <p className="app-prices">
+          Current Price: <br/>
           <table className="priceTable">
             <tr>
               <td>{ ReactHtmlParser(this.state.myRateSymbolUS) } {this.state.myRateUS} {this.state.myRateCodeUS}</td>
@@ -88,6 +105,11 @@ class App extends Component {
               <td>{ ReactHtmlParser(this.state.myRateSymbolEU) } {this.state.myRateEU} {this.state.myRateCodeEU}</td>
             </tr>
           </table>
+        </p>
+        <p className="app-history">
+        History (Last 31 Days): <br/>
+          <p className="app-historygraph">
+          </p>
         </p>
         </p>
         <p className="app-footer">
