@@ -68,9 +68,20 @@ class App extends Component {
     const historyRequest = async (_historicalApi) => {
       const historyResponse = await fetch(_historicalApi);
       const historyJson = await historyResponse.json();
+      
+      const sortedData = [];
+      for (let date in historyJson.bpi){
+        sortedData.push({
+          d: date,
+          p: historyJson.bpi[date].toLocaleString(),
+          x: sortedData.length,
+          y: historyJson.bpi[date]
+        });
+      }
+
 
       this.setState({
-        myHistory: historyJson.bpi,
+        myHistory: sortedData,
       });
   }
 
@@ -78,6 +89,8 @@ class App extends Component {
 }
 
   render() {
+
+    console.log(this.state.myHistory);
 
     return (
       <div className="app">
