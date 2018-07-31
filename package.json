@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "moment": "^2.21.0",
+    "moment": "^2.22.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-easy-chart": "^1.0.0",
     "react-html-parser": "^2.0.2",
     "react-moment": "^0.7.9",
     "react-render-html": "^0.6.0",
-    "react-scripts": "1.1.1"
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

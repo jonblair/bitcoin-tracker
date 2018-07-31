@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Moment from 'react-moment';
+import moment from 'moment';
+import ReactMoment from 'react-moment';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import { AreaChart } from 'react-easy-chart';
 
 const _api = 'https://api.coindesk.com/v1/bpi/currentprice.json';
 const _historicalApi = "https://api.coindesk.com/v1/bpi/historical/close.json?index=usd";
@@ -49,17 +51,14 @@ class App extends Component {
     const historyRequest = async (_historicalApi) => {
       const historyResponse = await fetch(_historicalApi);
       const historyJson = await historyResponse.json();
-      
       const sortedData = [];
+
       for (let date in historyJson.bpi){
         sortedData.push({
-          d: date,
-          p: historyJson.bpi[date].toLocaleString(),
-          x: sortedData.length,
-          y: historyJson.bpi[date]
-        });
+          x: moment(date).format('DD-MMM-YY'),
+          y: Math.floor(historyJson.bpi[date]),
+        });  
       }
-
 
       this.setState({
         myHistory: sortedData,
@@ -70,7 +69,6 @@ class App extends Component {
 }
 
   render() {
-    console.log(this.state.myHistory);
 
     return (
       <div className="app">
@@ -79,11 +77,11 @@ class App extends Component {
         </header>
         <p className="app-intro app-body">
         <p className="app-dates">
-          Updated Date: <Moment format="MM/DD/YYYY">{this.state.myUpdatedTime}</Moment>
+          Updated Date: <ReactMoment format="MM/DD/YYYY">{this.state.myUpdatedTime}</ReactMoment>
           <br/>
-          Updated Time (UTC): <Moment format="HH:mm">{this.state.myUpdatedTime}</Moment>
+          Updated Time (UTC): <ReactMoment format="HH:mm">{this.state.myUpdatedTime}</ReactMoment>
           <br/>
-          Local Time: <Moment format="hh:mm A">{this.state.myUpdatedTime}</Moment>
+          Local Time: <ReactMoment format="hh:mm A">{this.state.myUpdatedTime}</ReactMoment>
         </p>
         <p className="app-prices">
           Current Price: <br/>
@@ -100,8 +98,22 @@ class App extends Component {
           </table>
         </p>
         <p className="app-history">
-        History (Last 31 Days): <br/>
+        History: <br/>
           <p className="app-historygraph">
+            <AreaChart
+              className = "app-historygraph"
+              xType={'time'}
+              axes
+              grid
+              verticalGrid
+              noAreaGradient
+              areaColors={['blue']}
+              interpolate={'cardinal'}
+              tickTimeDisplayFormat={'%m/%d'}
+              width={1700}
+              height={400}
+              data={[this.state.myHistory]}
+            />
           </p>
         </p>
         </p>
