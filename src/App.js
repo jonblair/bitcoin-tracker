@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
 import moment from 'moment';
 import ReactMoment from 'react-moment';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import { AreaChart } from 'react-easy-chart';
+import './App.css';
 
 const _api = 'https://api.coindesk.com/v1/bpi/currentprice.json';
 const _historicalApi = "https://api.coindesk.com/v1/bpi/historical/close.json?index=usd";
@@ -63,10 +63,10 @@ class App extends Component {
       this.setState({
         myHistory: sortedData,
       });
-  }
+    }
 
-  historyRequest(_historicalApi);
-}
+    historyRequest(_historicalApi);
+  }
 
   render() {
 
