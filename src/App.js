@@ -84,7 +84,8 @@ class App extends Component {
           Local Time: <ReactMoment format="hh:mm A">{this.state.myUpdatedTime}</ReactMoment>
         </p>
         <p className="app-prices">
-          Current Price: <br/>
+          Current Price:
+          <br/>
           <table className="priceTable">
             <tr>
               <td>{ ReactHtmlParser(this.state.myUsdInfo.symbol) } {this.state.myUsdInfo.rate} {this.state.myUsdInfo.code} ({this.state.myUsdInfo.description})</td>
@@ -101,17 +102,16 @@ class App extends Component {
         History: <br/>
           <p className="app-historygraph">
             <AreaChart
-              className = "app-historygraph"
               xType={'time'}
               axes
               grid
               verticalGrid
               noAreaGradient
-              areaColors={['blue']}
+              areaColors={['#0000fd']}
               interpolate={'cardinal'}
               tickTimeDisplayFormat={'%m/%d'}
               width={1700}
-              height={400}
+              height={500}
               data={[this.state.myHistory]}
             />
           </p>
