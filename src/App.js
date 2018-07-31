@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Moment from 'react-moment';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
@@ -15,19 +14,10 @@ class App extends Component {
       myChartName: null,
       myDisclaimer: null,
       myUpdatedTime: null,
-      myRateUS: null,
-      myRateCodeUS: null,
-      myRateSymbolUS: null,
-      myRateDescriptionUS: null,
-      myRateGB: null,
-      myRateCodeGB: null,
-      myRateSymbolGB: null,
-      myRateDescriptionGB: null,
-      myRateEU: null,
-      myRateCodeEU: null,
-      myRateSymbolEU: null,
-      myRateDescriptionEU: null,
       myHistory: [],
+      myUsdInfo: [],
+      myGbpInfo: [],
+      myEurInfo: [],
     };
 
   }
@@ -46,18 +36,9 @@ class App extends Component {
         myChartName: json.chartName,
         myDisclaimer: json.disclaimer,
         myUpdatedTime: json.time.updated,
-        myRateUS: json.bpi.USD.rate,
-        myRateCodeUS: json.bpi.USD.code,
-        myRateSymbolUS: json.bpi.USD.symbol,
-        myRateDescriptionUS: json.bpi.USD.description,
-        myRateGB: json.bpi.GBP.rate,
-        myRateCodeGB: json.bpi.GBP.code,
-        myRateSymbolGB: json.bpi.GBP.symbol,
-        myRateDescriptionGB: json.bpi.GBP.description,
-        myRateEU: json.bpi.EUR.rate,
-        myRateCodeEU: json.bpi.EUR.code,
-        myRateSymbolEU: json.bpi.EUR.symbol,
-        myRateDescriptionEU: json.bpi.EUR.description
+        myUsdInfo: json.bpi.USD,
+        myGbpInfo: json.bpi.GBP,
+        myEurInfo: json.bpi.EUR,
       });
     }
     
@@ -89,13 +70,12 @@ class App extends Component {
 }
 
   render() {
-
     console.log(this.state.myHistory);
 
     return (
       <div className="app">
         <header className="app-header">
-          <h1 className="app-title">{this.state.myChartName} Tracker</h1>
+          <h1 className="app-title">Bitcoin Tracker</h1>
         </header>
         <p className="app-intro app-body">
         <p className="app-dates">
@@ -109,13 +89,13 @@ class App extends Component {
           Current Price: <br/>
           <table className="priceTable">
             <tr>
-              <td>{ ReactHtmlParser(this.state.myRateSymbolUS) } {this.state.myRateUS} {this.state.myRateCodeUS}</td>
+              <td>{ ReactHtmlParser(this.state.myUsdInfo.symbol) } {this.state.myUsdInfo.rate} {this.state.myUsdInfo.code} ({this.state.myUsdInfo.description})</td>
             </tr>
             <tr>
-              <td>{ ReactHtmlParser(this.state.myRateSymbolGB) } {this.state.myRateGB} {this.state.myRateCodeGB}</td>
+            <td>{ ReactHtmlParser(this.state.myGbpInfo.symbol) } {this.state.myGbpInfo.rate} {this.state.myGbpInfo.code} ({this.state.myGbpInfo.description})</td>
             </tr>
             <tr>
-              <td>{ ReactHtmlParser(this.state.myRateSymbolEU) } {this.state.myRateEU} {this.state.myRateCodeEU}</td>
+            <td>{ ReactHtmlParser(this.state.myEurInfo.symbol) } {this.state.myEurInfo.rate} {this.state.myEurInfo.code} ({this.state.myEurInfo.description})</td>
             </tr>
           </table>
         </p>
