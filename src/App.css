@@ -34,7 +34,7 @@
 }
 
 .app-history {
-  margin-top: 1.5em;
+  margin-top: 2.0em;
 }
 
 .app-historygraph {
@@ -48,6 +48,38 @@
 
 .priceTable {
   margin-left: 0.5em;
+}
+
+.app-historygraph-table{
+	display: table;
+  width: 90%;
+  margin-left: 3em;
+}
+.app-historygraph-tableRow {
+	display: table-row;
+}
+.app-historygraph-tableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+}
+.app-historygraph-tableCell, .app-historygraph-tableHead {
+	border: none;
+	display: table-cell;
+  padding: 3px 10px;
+  text-align: center;
+}
+.app-historygraph-tableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+.app-historygraph-tableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.app-historygraph-tableBody {
+	display: table-row-group;
 }
 
 @keyframes App-logo-spin {
