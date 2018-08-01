@@ -45,12 +45,13 @@ class HistoryGraph extends Component {
       render() {
           var maxPrice = Math.max.apply(Math, this.state.myHistory.map(function(lp) { return lp.z; }));
           var minPrice = Math.min.apply(Math, this.state.myHistory.map(function(hp) { return hp.z; }));
-          var yesterdayPriceObject = this.state.myHistory[this.state.myHistory.length - 1];
-          //var yesterdayPrice = yesterdayPriceObject.map(function(o) { return o.z; });
-          //var myCurrentPrice = this.props.currentPrice;
-          //var changePrice = yesterdayPriceObject.z;
-
-          console.log(yesterdayPriceObject);
+          var yesterdayPrice = null;
+          var myPriceChange = null; 
+          if (this.state.myHistory[this.state.myHistory.length - 1] !== undefined)
+          {
+            yesterdayPrice = this.state.myHistory[this.state.myHistory.length - 1].z;
+            myPriceChange = this.props.currentPrice - yesterdayPrice;
+          }
 
           return (
             <div>
@@ -68,7 +69,7 @@ class HistoryGraph extends Component {
                                     <CurrencyFormat value={minPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />
                                 </div>
                                 <div class="app-historygraph-tableCell">
-                                    Price Change(24 hrs): <br/>
+                                    Price Yesterday: <br/>
                                 </div>
                             </div>
                         </div>

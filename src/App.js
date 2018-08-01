@@ -33,7 +33,7 @@ class App extends Component {
         myChartName: json.chartName,
         myDisclaimer: json.disclaimer,
         myUpdatedTime: json.time.updated,
-        myCurrentUsdRate: json.bpi.USD.rate,
+        myCurrentUsdRate: json.bpi.USD.rate_float,
       });
     }
     
