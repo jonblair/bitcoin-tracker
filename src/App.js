@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import ReactMoment from 'react-moment';
+import CurrencyFormat from 'react-currency-format';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import { AreaChart } from 'react-easy-chart';
 import './App.css';
@@ -88,13 +89,13 @@ class App extends Component {
           <br/>
           <table className="priceTable">
             <tr>
-              <td>{ ReactHtmlParser(this.state.myUsdInfo.symbol) } {this.state.myUsdInfo.rate} {this.state.myUsdInfo.code} ({this.state.myUsdInfo.description})</td>
+            <td>{this.state.myUsdInfo.description} ({this.state.myUsdInfo.code}): <CurrencyFormat value={this.state.myUsdInfo.rate} displayType={'text'} thousandSeparator={true} prefix={ ReactHtmlParser(this.state.myUsdInfo.symbol)  } decimalScale={2} /></td>
             </tr>
             <tr>
-            <td>{ ReactHtmlParser(this.state.myGbpInfo.symbol) } {this.state.myGbpInfo.rate} {this.state.myGbpInfo.code} ({this.state.myGbpInfo.description})</td>
+            <td>{this.state.myGbpInfo.description} ({this.state.myGbpInfo.code}): <CurrencyFormat value={this.state.myGbpInfo.rate} displayType={'text'} thousandSeparator={true} prefix={ ReactHtmlParser(this.state.myGbpInfo.symbol)  } decimalScale={2} /></td>
             </tr>
             <tr>
-            <td>{ ReactHtmlParser(this.state.myEurInfo.symbol) } {this.state.myEurInfo.rate} {this.state.myEurInfo.code} ({this.state.myEurInfo.description})</td>
+            <td>{this.state.myEurInfo.description} ({this.state.myEurInfo.code}): <CurrencyFormat value={this.state.myEurInfo.rate} displayType={'text'} thousandSeparator={true} prefix={ ReactHtmlParser(this.state.myEurInfo.symbol)  } decimalScale={2} /></td>
             </tr>
           </table>
         </p>
@@ -110,8 +111,8 @@ class App extends Component {
               areaColors={['#0000fd']}
               interpolate={'cardinal'}
               tickTimeDisplayFormat={'%m/%d'}
-              width={1700}
-              height={500}
+              width={1400}
+              height={400}
               data={[this.state.myHistory]}
             />
           </p>
