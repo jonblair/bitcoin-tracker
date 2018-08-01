@@ -50,9 +50,7 @@ class App extends Component {
         <p className="app-dates">
           Updated Date: <ReactMoment format="MM/DD/YYYY">{this.state.myUpdatedTime}</ReactMoment>
           <br/>
-          Updated Time (UTC): <ReactMoment format="HH:mm">{this.state.myUpdatedTime}</ReactMoment>
-          <br/>
-          Local Time: <ReactMoment format="hh:mm A">{this.state.myUpdatedTime}</ReactMoment>
+          Updated Time: <ReactMoment format="hh:mm A">{this.state.myUpdatedTime}</ReactMoment> (<ReactMoment format="HH:mm">{this.state.myUpdatedTime}</ReactMoment> UTC) 
         </p>
         <CurrentPrices/>
         <p className="app-history">
