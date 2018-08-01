@@ -45,14 +45,17 @@ class HistoryGraph extends Component {
       render() {
           var maxPrice = Math.max.apply(Math, this.state.myHistory.map(function(lp) { return lp.z; }));
           var minPrice = Math.min.apply(Math, this.state.myHistory.map(function(hp) { return hp.z; }));
-          var yesterdayPrice = null;
-          var myPriceChange = null; 
+          var yesterdayPrice = 0;
+          var myPriceChangeYesterday = 0; 
+          var myPriceChangeHigh = 0;
+          var myPriceChangeLow = 0; 
           if (this.state.myHistory[this.state.myHistory.length - 1] !== undefined)
           {
             yesterdayPrice = this.state.myHistory[this.state.myHistory.length - 1].z;
-            myPriceChange = this.props.currentPrice - yesterdayPrice;
+            myPriceChangeYesterday = this.props.currentPrice - yesterdayPrice;
+            myPriceChangeHigh = this.props.currentPrice - maxPrice;
+            myPriceChangeLow = this.props.currentPrice - minPrice;
           }
-
           return (
             <div>
             History (USD): <br/>
@@ -63,13 +66,17 @@ class HistoryGraph extends Component {
                                 <div class="app-historygraph-tableCell">
                                     Highest Price: <br/>  
                                     <CurrencyFormat value={maxPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />
+                                    &nbsp;(<CurrencyFormat value={myPriceChangeHigh} allowNegative={true} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />)
                                 </div>
                                 <div class="app-historygraph-tableCell">
                                     Lowest Price: <br/>
                                     <CurrencyFormat value={minPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />
+                                    &nbsp;(<CurrencyFormat value={myPriceChangeLow} allowNegative={true} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />)
                                 </div>
                                 <div class="app-historygraph-tableCell">
                                     Price Yesterday: <br/>
+                                    <CurrencyFormat value={yesterdayPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />
+                                    &nbsp;(<CurrencyFormat value={myPriceChangeYesterday} allowNegative={true} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />)
                                 </div>
                             </div>
                         </div>
