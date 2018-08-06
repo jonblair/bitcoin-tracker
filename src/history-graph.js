@@ -49,13 +49,25 @@ class HistoryGraph extends Component {
           var myPriceChangeYesterday = 0; 
           var myPriceChangeHigh = 0;
           var myPriceChangeLow = 0; 
+          var myAveragePrice = 0;
+          var myTotalSum = 0;
+          var myAveragePriceDiff = 0;
+
           if (this.state.myHistory[this.state.myHistory.length - 1] !== undefined)
           {
             yesterdayPrice = this.state.myHistory[this.state.myHistory.length - 1].z;
             myPriceChangeYesterday = this.props.currentPrice - yesterdayPrice;
             myPriceChangeHigh = this.props.currentPrice - maxPrice;
             myPriceChangeLow = this.props.currentPrice - minPrice;
+            
+            for (var i = 0; i < this.state.myHistory.length; i++) {
+                myTotalSum += this.state.myHistory[i].z;
+            }
+
+            myAveragePrice = myTotalSum / this.state.myHistory.length;
+            myAveragePriceDiff = this.props.currentPrice - myAveragePrice;
           }
+
           return (
             <div>
             History (USD): <br/>
@@ -72,6 +84,11 @@ class HistoryGraph extends Component {
                                     Lowest Price: <br/>
                                     <CurrencyFormat value={minPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />
                                     &nbsp;(<CurrencyFormat value={myPriceChangeLow} allowNegative={true} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />)
+                                </div>
+                                <div class="app-historygraph-tableCell">
+                                    Average Price: <br/>
+                                    <CurrencyFormat value={myAveragePrice} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />
+                                    &nbsp;(<CurrencyFormat value={myAveragePriceDiff} allowNegative={true} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} />)
                                 </div>
                                 <div class="app-historygraph-tableCell">
                                     Price Yesterday: <br/>
