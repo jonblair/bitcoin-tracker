@@ -13,7 +13,7 @@ class HistoryGraph extends Component {
         super(props);
 
         //12 hours
-        subscribeToTimer(43200000, (err, timestamp) => 
+        subscribeToTimer(10000, (err, timestamp) => 
         this.getHistoricalData()   
         )
 
