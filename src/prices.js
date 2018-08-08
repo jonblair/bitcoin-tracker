@@ -13,7 +13,7 @@ class CurrentPrices extends Component {
       super(props);
   
       //10 seconds
-      subscribeToTimer(1000, (err, timestamp) => 
+      subscribeToTimer(10000, (err, timestamp) => 
         this.getBitcoinData()   
       )
 
