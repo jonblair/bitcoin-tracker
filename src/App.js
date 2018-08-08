@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactMoment from 'react-moment';
+import { subscribeToTimer } from './api';
 import './App.css';
 
 //Components
@@ -12,6 +13,11 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    //10 seconds
+    subscribeToTimer(1000, (err, timestamp) => 
+    this.getBitcoinData()   
+    )
+
     this.state = { 
       myChartName: null,
       myDisclaimer: null,
@@ -21,7 +27,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getBitcoinData();
+      this.getBitcoinData();
   }
 
   getBitcoinData() {
@@ -50,7 +56,7 @@ class App extends Component {
         <p className="app-dates">
           Updated Date: <ReactMoment format="MM/DD/YYYY">{this.state.myUpdatedTime}</ReactMoment>
           <br/>
-          Updated Time: <ReactMoment format="hh:mm A">{this.state.myUpdatedTime}</ReactMoment> (<ReactMoment format="HH:mm">{this.state.myUpdatedTime}</ReactMoment> UTC) 
+          Updated Time: <ReactMoment format="hh:mm:ss A">{this.state.myUpdatedTime}</ReactMoment> (<ReactMoment format="HH:mm">{this.state.myUpdatedTime}</ReactMoment> UTC)
         </p>
         <CurrentPrices/>
         <p className="app-history">

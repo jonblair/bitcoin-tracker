@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import ReactMoment from 'react-moment';
+import { subscribeToTimer } from './api';
 import CurrencyFormat from 'react-currency-format';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import './App.css';
@@ -8,9 +9,14 @@ import './App.css';
 const _api = 'https://api.coindesk.com/v1/bpi/currentprice.json';
 
 class CurrentPrices extends Component {
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
   
+      //10 seconds
+      subscribeToTimer(1000, (err, timestamp) => 
+        this.getBitcoinData()   
+      )
+
       this.state = { 
         myUsdInfo: [],
         myGbpInfo: [],

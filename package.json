@@ -11,7 +11,9 @@
     "react-html-parser": "^2.0.2",
     "react-moment": "^0.7.9",
     "react-render-html": "^0.6.0",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^1.1.4",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

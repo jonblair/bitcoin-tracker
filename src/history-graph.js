@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { AreaChart } from 'react-easy-chart';
 import CurrencyFormat from 'react-currency-format';
+import { subscribeToTimer } from './api';
 import './App.css';
 
 
@@ -10,6 +11,11 @@ const _api = "https://api.coindesk.com/v1/bpi/historical/close.json?index=usd";
 class HistoryGraph extends Component {
     constructor(props) {
         super(props);
+
+        //12 hours
+        subscribeToTimer(43200000, (err, timestamp) => 
+        this.getHistoricalData()   
+        )
 
         this.state = { 
             myHistory: [],
